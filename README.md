@@ -1,65 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## CORE 4 DE UBIK - 24/7/2022
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## USO
+- Clonar desde htdocs
 
-## About Laravel
+git clone https://github.com/moranhector/core4.git nombre_carpeta_proyecto  
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Abrir carpeta con VSCODE
+cd nombre_carpeta_proyecto  
+composer update  
+composer install  
+Renombrar .env.example  ( desde VScode )
+ 
+CREAR DATABASE  
+Configurar la base de datos   
+php artisan key:generate 
+php artisan migrate  
+php artisan serve ( Para probar )
+Registrar un usuario 
+Crear repositorio en Github  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## CREACION DEL CORE 4
 
-## Learning Laravel
+## Crear proyecto Laravel
+- composer create-project --prefer-dist laravel/laravel core4
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- cd core4
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Crear repositorio en Github 
+echo "# core2" >> README.md  
+git init  
+git add README.md  
+git commit -m "first commit"  
+git branch -M main  
+git remote add origin https://github.com/moranhector/core2.git  
+git push -u origin main  
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+##  Agregar Laravel Breeze
+- composer require laravel/breeze:1.9.2
+- php artisan breeze:install
+- npm install
+- npm run dev
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+##  Corregir problema para Mysql Viejo
+- app\Providers\AppServiceProvider.php
 
-## Contributing
+    use Illuminate\Support\Facades\Schema;  ( NO OLVIDAR INCLUIR )  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    public function boot()  
+    {  
+        //  
+        Schema::defaultStringLength(191); //Solved by increasing StringLength
+    }  
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- php artisan migrate
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+##  Agregar Laravel DebugBar
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# core4
+- composer require barryvdh/laravel-debugbar --dev
+
+
+##  Subir a Github
+En GitBash  
+git add .  
+git commit -m "Agregamos Infyom "  
+git branch -M main  
+git push -u origin main  
+
+
+##  Agregar Infyom
+
+
+
+- Add following packages into composer.json while using it with Laravel 8.
+
+ "require": {  
+     "infyomlabs/laravel-generator": "^3.0",  
+     "laravelcollective/html": "^6.2",  
+     "infyomlabs/adminlte-templates": "^3.0"  
+ } 
+
+
+- composer update
+
+
+- Add Aliases : Add following alias to aliases array in config/app.php
+
+
+'Form'      => Collective\Html\FormFacade::class,  
+'Html'      => Collective\Html\HtmlFacade::class,  
+'Flash'     => Laracasts\Flash\Flash::class,  
+
+- php artisan vendor:publish --provider="InfyOm\Generator\InfyOmGeneratorServiceProvider"
+
+
+- Open app\Providers\RouteServiceProvider.php and update boot method as following:
+
+
+    Route::prefix('api/v1')  
+        ->middleware('api')  
+        ->as('api.')  
+        ->namespace($this->app->getNamespace().'Http\Controllers\API')  
+        ->group(base_path('routes/api.php'));   
+
+
+- php artisan infyom:publish
+
+
+
+- php artisan infyom.publish:layout
+- php artisan infyom.publish:layout --localized
+
+
+
