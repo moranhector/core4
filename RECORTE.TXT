@@ -40,8 +40,11 @@ php artisan infyom:rollback Artesano scaffold  PARA DESHACER ULTIMA GENERACION
 php artisan infyom:scaffold Artesano --fieldsFile Artesano.json PARA GENERAR DESDE ARCHIVO JSON
 
 
-TIPOS
+TIPS
 https://bestofphp.com/repo/InfyOmLabs-laravel-generator-php-developer-tools
 
 input value onkeyup="this.value = this.value.toUpperCase();"
+
+Como generar los Select Options
+
 
